@@ -75,8 +75,8 @@ padding: user.insert_between(" ", " ")
     insert(" ")
 
 # Undo/redo
-undo that: edit.undo()
-redo that: edit.redo()
+(undo that | nope | blast): edit.undo()
+(redo that | yes indeed): edit.redo()
 
 # Save
 file save: edit.save()

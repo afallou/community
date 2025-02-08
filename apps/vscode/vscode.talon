@@ -8,6 +8,49 @@ tag(): user.splits
 tag(): user.tabs
 tag(): user.command_search
 
+#talon app actions
+<user.teleport> last:
+    user.vscode("workbench.action.openPreviousRecentlyUsedEditorInGroup")
+
+bow: user.vscode("workbench.action.navigateForward")
+stern: user.vscode("workbench.action.navigateBack")
+
+bandaid: user.vscode("editor.action.quickFix")
+
+# AI Chat interactions
+chat discuss: user.vscode("aichat.newchataction")
+chat composer: user.vscode("composer.startComposerPrompt")
+chat add: user.vscode("aipopup.action.modal.generate")
+chat accept: user.vscode("editor.action.inlineDiffs.acceptAll")
+chat file hunt: user.vscode("aichat.addfilestochataction")
+chat close: user.vscode("aichat.close-sidebar")
+chat new: key(cmd-n)
+
+breakpoint: insert("breakpoint()")
+
+# File management
+dock copy path: user.vscode("copyFilePath")
+file scout all: user.vscode("workbench.action.findInFiles")
+file scout: user.vscode("actions.find")
+file swap [<number_small>]:
+    user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
+    sleep(50ms)
+    user.choose(number_small or 1)
+swapper: user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
+
+yes:
+    sleep(100ms)
+    key(tab)
+
+disk: edit.save()
+disk all: edit.save_all()
+disclose:
+    key(esc:5)
+    edit.save()
+    sleep(500ms)
+    key(cmd-w)
+
+
 window reload: user.vscode("workbench.action.reloadWindow")
 window close: user.vscode("workbench.action.closeWindow")
 #multiple_cursor.py support end
@@ -24,7 +67,9 @@ bar run: user.vscode("workbench.view.debug")
 bar search: user.vscode("workbench.view.search")
 bar source: user.vscode("workbench.view.scm")
 bar test: user.vscode("workbench.view.testing.focus")
-bar switch: user.vscode("workbench.action.toggleSidebarVisibility")
+bar dog: user.vscode("workbench.action.toggleSidebarVisibility")
+# Extensions
+bar sql: user.vscode("workbench.view.extension.postgres-explorer")
 
 # Symbol search
 symbol hunt [<user.text>]:
@@ -46,8 +91,8 @@ panel terminal: user.vscode("workbench.action.terminal.focus")
 focus editor: user.vscode("workbench.action.focusActiveEditorGroup")
 
 # Settings
-show settings: user.vscode("workbench.action.openGlobalSettings")
-show settings json: user.vscode("workbench.action.openSettingsJson")
+show settings: user.vscode("workbench.action.openSettingsJson")
+show settings global: user.vscode("workbench.action.openGlobalSettings")
 show settings folder: user.vscode("workbench.action.openFolderSettings")
 show settings folder json: user.vscode("workbench.action.openFolderSettingsFile")
 show settings workspace: user.vscode("workbench.action.openWorkspaceSettings")
@@ -63,9 +108,16 @@ snip (last | previous): user.vscode("jumpToPrevSnippetPlaceholder")
 centered switch: user.vscode("workbench.action.toggleCenteredLayout")
 fullscreen switch: user.vscode("workbench.action.toggleFullScreen")
 theme switch: user.vscode("workbench.action.selectTheme")
-wrap switch: user.vscode("editor.action.toggleWordWrap")
+wrap dog: user.vscode("editor.action.toggleWordWrap")
 zen switch: user.vscode("workbench.action.toggleZenMode")
-
+zen mode:
+    user.vscode("workbench.action.closeSidebar")
+    user.vscode("workbench.action.closePanel")
+split vert: user.vscode("workbench.action.splitEditor")
+split next: user.vscode("workbench.action.moveEditorToNextGroup")
+split last: user.vscode("workbench.action.moveEditorToPreviousGroup")
+split merge: user.vscode("workbench.action.joinAllGroups")
+panel close: user.vscode("workbench.action.closePanel")
 # File Commands
 file hunt [<user.text>]:
     user.vscode("workbench.action.quickOpen")
@@ -113,7 +165,9 @@ imports fix: user.vscode("editor.action.organizeImports")
 problem next: user.vscode("editor.action.marker.nextInFiles")
 problem last: user.vscode("editor.action.marker.prevInFiles")
 problem fix: user.vscode("problems.action.showQuickFixes")
-rename that: user.vscode("editor.action.rename")
+rename that:
+    user.vscode("editor.action.rename")
+    sleep(100ms)
 refactor that: user.vscode("editor.action.refactor")
 whitespace trim: user.vscode("editor.action.trimTrailingWhitespace")
 language switch: user.vscode("workbench.action.editor.changeLanguageMode")
@@ -148,6 +202,7 @@ close all tabs: user.vscode("workbench.action.closeAllEditors")
 close tabs way right: user.vscode("workbench.action.closeEditorsToTheRight")
 close tabs way left: user.vscode("workbench.action.closeEditorsToTheLeft")
 
+
 # Folding
 fold that: user.vscode("editor.fold")
 unfold that: user.vscode("editor.unfold")
@@ -165,6 +220,7 @@ fold six: user.vscode("editor.foldLevel6")
 fold seven: user.vscode("editor.foldLevel7")
 
 # Git / Github (not using verb-noun-adjective pattern, mirroring terminal commands.)
+git blame: user.vscode("gitlens.toggleFileBlame")
 git branch: user.vscode("git.branchFrom")
 git branch this: user.vscode("git.branch")
 git checkout [<user.text>]:
@@ -232,17 +288,23 @@ debug console: user.vscode("workbench.debug.action.toggleRepl")
 debug clean: user.vscode("workbench.debug.panel.action.clearReplAction")
 
 # Terminal
-terminal external: user.vscode("workbench.action.terminal.openNativeConsole")
-terminal new: user.vscode("workbench.action.terminal.new")
-terminal next: user.vscode("workbench.action.terminal.focusNext")
-terminal last: user.vscode("workbench.action.terminal.focusPrevious")
-terminal split: user.vscode("workbench.action.terminal.split")
-terminal zoom: user.vscode("workbench.action.toggleMaximizedPanel")
-terminal trash: user.vscode("workbench.action.terminal.kill")
-terminal toggle: user.vscode_and_wait("workbench.action.terminal.toggleTerminal")
-terminal scroll up: user.vscode("workbench.action.terminal.scrollUp")
-terminal scroll down: user.vscode("workbench.action.terminal.scrollDown")
-terminal <number_small>: user.vscode_terminal(number_small)
+term external: user.vscode("workbench.action.terminal.openNativeConsole")
+term new: user.vscode("workbench.action.terminal.new")
+term next: user.vscode("workbench.action.terminal.focusNext")
+term last: user.vscode("workbench.action.terminal.focusPrevious")
+term split: user.vscode("workbench.action.terminal.split")
+term zoom: user.vscode("workbench.action.toggleMaximizedPanel")
+term trash: user.vscode("workbench.action.terminal.kill")
+term dog: user.vscode_and_wait("workbench.action.terminal.toggleTerminal")
+term rerun:
+    user.vscode("workbench.action.terminal.toggleTerminal")
+    sleep(50ms)
+    edit.up()
+    sleep(50ms)
+    key(enter)
+term scroll up: user.vscode("workbench.action.terminal.scrollUp")
+term scroll down: user.vscode("workbench.action.terminal.scrollDown")
+term <number_small>: user.vscode_terminal(number_small)
 
 task run [<user.text>]:
     user.vscode("workbench.action.tasks.runTask")
@@ -287,3 +349,21 @@ cell run: user.vscode("notebook.cell.execute")
 
 install local: user.vscode("workbench.extensions.action.installVSIX")
 preview markdown: user.vscode("markdown.showPreview")
+
+cross: user.split_next()
+
+(<user.show_list> sesh | sesh <user.show_list>) [<user.text>] [halt]:
+    user.vscode("workbench.action.openRecent")
+    sleep(250ms)
+    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+    sleep(250ms)
+(<user.teleport> sesh | sesh <user.teleport>) [<user.text>] [halt]:
+    user.vscode("workbench.action.openRecent")
+    sleep(250ms)
+    user.insert_formatted(text or "", "DASH_SEPARATED,ALL_LOWERCASE")
+    key(enter)
+    sleep(250ms)
+
+{user.search_engine} scout <user.cursorless_target>:
+    text = user.cursorless_get_text(cursorless_target)
+    user.search_with_search_engine(search_engine, text)

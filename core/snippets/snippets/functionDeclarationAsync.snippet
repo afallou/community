@@ -1,0 +1,15 @@
+name: asyncFunctionDeclaration
+phrase: disco
+insertionScope: namedFunction | statement
+
+$0.wrapperPhrase: disco
+$0.wrapperScope: statement
+---
+
+language: python
+
+$1.insertionFormatter: SNAKE_CASE
+-
+async def $1($2):
+    $0
+---

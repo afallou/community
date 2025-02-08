@@ -1,0 +1,16 @@
+list: user.system_paths
+hostname: macbook-pro-af.home
+-
+user: /Users/adrienfallou
+desktop: /Users/adrienfallou/Desktop
+desk: /Users/adrienfallou/Desktop
+documents: /Users/adrienfallou/Documents
+docks: /Users/adrienfallou/Documents
+downloads: /Users/adrienfallou/Downloads
+music: /Users/adrienfallou/Music
+pictures: /Users/adrienfallou/Pictures
+videos: /Users/adrienfallou/Videos
+talon home: /Users/adrienfallou/.talon
+talon recordings: /Users/adrienfallou/.talon/recordings
+talon user: /Users/adrienfallou/.talon/user
+home: /Users/adrienfallou

@@ -2,10 +2,32 @@ list: user.vocabulary
 -
 N map: nmap
 under documented: under-documented
-nmap
 admin
+API
 Cisco
 Citrix
-VPN
 DNS
+frontend
+gcloud
+github
+GraphQL
+js
+json
 Minecraft
+mypy
+nmap
+npm
+Postgres
+PostgreSQL
+pulumi
+pytest
+Qdrant
+ruff
+SQL
+UI
+upsert
+URI
+VPN
+vscode
+XML
+zen

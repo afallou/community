@@ -9,3 +9,8 @@ tag(): user.git
 tag(): user.kubectl
 tag(): user.tabs
 tag(): user.readline
+
+split: key(cmd-shift-d)
+split vertical: key(cmd-d)
+blow dog: key(cmd-shift-enter)
+sigterm: key(ctrl-c)
