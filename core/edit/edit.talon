@@ -46,6 +46,8 @@ go page down: edit.page_down()
 indent [more]: edit.indent_more()
 (indent less | out dent): edit.indent_less()
 
+# Run something
+run that: key("cmd-enter")
 # Copy
 copy that: edit.copy()
 

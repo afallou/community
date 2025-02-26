@@ -12,6 +12,20 @@ running list: user.switcher_toggle_running()
 running close: user.switcher_hide_running()
 launch <user.launch_applications>: user.switcher_launch(launch_applications)
 clipper: key(cmd-shift-v)
+clipper next:
+    key(cmd-shift-v)
+    sleep(100ms)
+    key(down)
+    sleep(100ms)
+    key(enter)
+
+clipper last:
+    key(cmd-shift-v)
+    sleep(100ms)
+    key(up)
+    sleep(100ms)
+    key(enter)
+
 
 snap <user.window_snap_position>: user.snap_window(window_snap_position)
 snap next [screen]: user.move_window_next_screen()
