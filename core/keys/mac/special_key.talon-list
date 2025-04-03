@@ -16,3 +16,4 @@ insert: insert
 wipe: backspace
 delete: backspace
 forward delete: delete
+wipe word: alt-backspace

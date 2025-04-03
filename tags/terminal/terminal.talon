@@ -4,7 +4,9 @@ tag: terminal
 
 lisa [dir] [<user.text>]: user.terminal_list_directories(text or "")
 lisa all: user.terminal_list_all_directories()
-katie [dir] [<user.text>]: user.terminal_change_directory(text or "")
+# katie [dir] [<user.text>]: user.terminal_change_directory(text or "")
+katie [dir] [<user.text>]: insert('cd {text or ""}')
+# katie: insert("cd ")
 katie root: user.terminal_change_directory_root()
 katie (up | back): user.terminal_change_directory("..")
 katie last: user.terminal_change_directory("-")
@@ -16,9 +18,10 @@ rerun [<user.text>]: user.terminal_rerun_search(text or "")
 rerun search: user.terminal_rerun_search("")
 kill all: user.terminal_kill_all()
 wipe word:
-    edit.wipe()
-    sleep(50ms)
     key("ctrl-w")
+code that:
+    insert("cursor .")
+    key("enter")
 
 workon:
     insert("wo")

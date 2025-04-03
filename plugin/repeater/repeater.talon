@@ -8,5 +8,4 @@ repeat that <number_small> [times]: core.repeat_command(number_small)
     core.repeat_partial_phrase(number_small or 1)
 
 parrot(cluck):
-    app.notify("cluck")
     core.repeat_phrase(1)

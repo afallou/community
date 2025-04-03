@@ -26,7 +26,7 @@ chat file hunt: user.vscode("aichat.addfilestochataction")
 chat close: user.vscode("aichat.close-sidebar")
 chat new: key(cmd-n)
 
-breakpoint: insert("breakpoint()")
+(breakpoint | break point): insert("breakpoint()")
 
 # File management
 dock copy path: user.vscode("copyFilePath")
@@ -50,6 +50,10 @@ disclose:
     sleep(500ms)
     key(cmd-w)
 
+# Is this actually useful?
+insert <user.cursorless_destination> <user.format_code>+$:
+    user.cursorless_insert(cursorless_destination, format_code_list)
+
 
 window reload: user.vscode("workbench.action.reloadWindow")
 window close: user.vscode("workbench.action.closeWindow")
@@ -66,7 +70,7 @@ bar outline: user.vscode("outline.focus")
 bar run: user.vscode("workbench.view.debug")
 bar search: user.vscode("workbench.view.search")
 bar source: user.vscode("workbench.view.scm")
-bar test: user.vscode("workbench.view.testing.focus")
+bar test: user.vscode("workbench.view.testing.focus", something_new)
 bar dog: user.vscode("workbench.action.toggleSidebarVisibility")
 # Extensions
 bar sql: user.vscode("workbench.view.extension.postgres-explorer")
@@ -123,6 +127,11 @@ file hunt [<user.text>]:
     user.vscode("workbench.action.quickOpen")
     sleep(50ms)
     insert(text or "")
+line hunt [<number>]:
+    user.vscode("workbench.action.quickOpen")
+    sleep(50ms)
+    insert(":")
+    insert(number or "")
 file hunt (pace | paste):
     user.vscode("workbench.action.quickOpen")
     sleep(50ms)
@@ -296,8 +305,8 @@ term split: user.vscode("workbench.action.terminal.split")
 term zoom: user.vscode("workbench.action.toggleMaximizedPanel")
 term trash: user.vscode("workbench.action.terminal.kill")
 term dog: user.vscode_and_wait("workbench.action.terminal.toggleTerminal")
-term rerun:
-    user.vscode("workbench.action.terminal.toggleTerminal")
+term again:
+    user.vscode("workbench.action.terminal.focusTabs")
     sleep(50ms)
     edit.up()
     sleep(50ms)

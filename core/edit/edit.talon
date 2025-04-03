@@ -48,6 +48,10 @@ indent [more]: edit.indent_more()
 
 # Run something
 run that: key("cmd-enter")
+# Run and go to next cell
+# This is somewhat specific to jupyter notebooks
+# Putting it here for browser-based notebooks
+run next: key("shift-enter")
 # Copy
 copy that: edit.copy()
 
