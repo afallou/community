@@ -5,12 +5,19 @@ under documented: under-documented
 admin
 API
 Adrien
+off o: Auth0
+AWS
+bot
 Camunda
 Cisco
 Citrix
+Claude
 CLI
+config
+see tea oh: CTO
 DNS
 endpoint
+enum
 EU
 Fallou
 frontend
@@ -21,15 +28,21 @@ GraphQL
 js
 json
 Kazaar
+Lemlist
 llm
+metaflow
 Minecraft
 mypy
 neo four jay: neo4j
 nmap
 npm
+oof: OAuth
+openai
+pee are dee: PRD
 POC
 Postgres
 PostgreSQL
+pee are: PR
 pulumi
 pytest
 RAG
@@ -38,11 +51,14 @@ Qdrant
 ruff
 Scileads
 SQL
+TacArc
 tech
+tmux
 UI
 upsert
 URI
 VPN
-vscode
+VSCode
 XML
+xstate
 zen

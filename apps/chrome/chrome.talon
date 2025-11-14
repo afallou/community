@@ -12,3 +12,6 @@ tab hunt <user.text>$:
     sleep(200ms)
     insert("{text}")
     key(down)
+
+# Resume flow in debugger
+resume: key(cmd-\)

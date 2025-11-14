@@ -31,3 +31,9 @@ copy paste:
     edit.copy()
     sleep(50ms)
     edit.paste()
+
+git go home:
+    insert("BRANCH=$(git branch --show-current) && git checkout main && git pull && git branch -d $BRANCH")
+    key("enter")
+
+sigterm: key(ctrl-c)

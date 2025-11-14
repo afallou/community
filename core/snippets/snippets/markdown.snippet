@@ -3,6 +3,8 @@ language: markdown
 
 name: link
 phrase: link
+
+$1.wrapperPhrase: link
 -
 [$1]($0)
 ---
@@ -22,6 +24,7 @@ phrase: to do | check box | tick box
 
 name: bold
 phrase: bold | strong
+$1.wrapperPhrase: bold
 -
 **$0**
 ---

@@ -53,12 +53,14 @@ run that: key("cmd-enter")
 # Putting it here for browser-based notebooks
 run next: key("shift-enter")
 # Copy
+yanky: edit.copy()
 copy that: edit.copy()
 
 # Cut
 cut that: edit.cut()
 
 # Paste
+pasty: edit.paste()
 (pace | paste) (that | it): edit.paste()
 (pace | paste) enter:
     edit.paste()

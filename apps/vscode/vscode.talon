@@ -19,19 +19,22 @@ bandaid: user.vscode("editor.action.quickFix")
 
 # AI Chat interactions
 chat discuss: user.vscode("aichat.newchataction")
-chat composer: user.vscode("composer.startComposerPrompt")
+agent dog: user.vscode("cursor.toggleAgentWindowIDEUnification")
+patrol dog: user.vscode("workbench.action.toggleAuxiliaryBar")
+chat plan: user.vscode("composerMode.plan")
 chat add: user.vscode("aipopup.action.modal.generate")
 chat accept: user.vscode("editor.action.inlineDiffs.acceptAll")
 chat file hunt: user.vscode("aichat.addfilestochataction")
 chat close: user.vscode("aichat.close-sidebar")
 chat new: key(cmd-n)
 
-(breakpoint | break point): insert("breakpoint()")
+# (breakpoint | break point): insert("breakpoint()")
 
 # File management
 dock copy path: user.vscode("copyFilePath")
 file scout all: user.vscode("workbench.action.findInFiles")
 file scout: user.vscode("actions.find")
+file replace all: user.vscode("workbench.action.replaceInFiles")
 file swap [<number_small>]:
     user.vscode("workbench.action.quickOpenPreviousRecentlyUsedEditorInGroup")
     sleep(50ms)
@@ -75,10 +78,28 @@ bar dog: user.vscode("workbench.action.toggleSidebarVisibility")
 # Extensions
 bar sql: user.vscode("workbench.view.extension.postgres-explorer")
 
+# Cursor AI suggestions
+prop last: user.vscode("editor.action.inlineDiffs.previousChange")
+prop next: user.vscode("editor.action.inlineDiffs.nextChange")
+prop yes:
+    user.vscode("editor.action.inlineDiffs.acceptPartialEdit")
+    user.vscode("editor.action.inlineDiffs.nextChange")
+prop no:
+    user.vscode("editor.action.inlineDiffs.rejectPartialEdit")
+    user.vscode("editor.action.inlineDiffs.nextChange")
+prop file accept: user.vscode("editor.action.inlineDiffs.acceptAll")
+prop continue:
+    user.vscode("editor.action.inlineDiffs.acceptAll")
+    user.vscode("editor.action.inlineDiffs.nextDiffFile")
+prop file reject: user.vscode("editor.action.inlineDiffs.rejectAll")
+prop file next: user.vscode("editor.action.inlineDiffs.nextDiffFile")
+prop file last: user.vscode("editor.action.inlineDiffs.previousDiffFile")
+
 # Symbol search
 symbol hunt [<user.text>]:
     user.vscode("workbench.action.gotoSymbol")
     sleep(50ms)
+    insert(":")
     insert(text or "")
 
 symbol hunt all [<user.text>]:
@@ -113,13 +134,15 @@ centered switch: user.vscode("workbench.action.toggleCenteredLayout")
 fullscreen switch: user.vscode("workbench.action.toggleFullScreen")
 theme switch: user.vscode("workbench.action.selectTheme")
 wrap dog: user.vscode("editor.action.toggleWordWrap")
-zen switch: user.vscode("workbench.action.toggleZenMode")
+zen dog: user.vscode("workbench.action.toggleZenMode")
 zen mode:
     user.vscode("workbench.action.closeSidebar")
     user.vscode("workbench.action.closePanel")
+    user.vscode("aichat.close-sidebar")
 split vert: user.vscode("workbench.action.splitEditor")
 split next: user.vscode("workbench.action.moveEditorToNextGroup")
 split last: user.vscode("workbench.action.moveEditorToPreviousGroup")
+split pop: user.vscode("workbench.action.moveEditorToNewWindow")
 split merge: user.vscode("workbench.action.joinAllGroups")
 panel close: user.vscode("workbench.action.closePanel")
 # File Commands
@@ -143,6 +166,13 @@ file create sibling: user.vscode_and_wait("explorer.newFile")
 file create: user.vscode("workbench.action.files.newUntitledFile")
 file create relative: user.vscode("fileutils.newFile")
 file create root: user.vscode("fileutils.newFileAtRoot")
+file create scratch:
+    user.vscode("fileutils.newFileAtRoot")
+    sleep(50ms)
+    key(enter)
+    sleep(100ms)
+    insert("scratchpad.md")
+    key(enter)
 file rename:
     user.vscode("fileutils.renameFile")
     sleep(150ms)
@@ -318,6 +348,13 @@ term <number_small>: user.vscode_terminal(number_small)
 task run [<user.text>]:
     user.vscode("workbench.action.tasks.runTask")
     insert(user.text or "")
+
+katie [dir] [<user.text>]: insert('cd {text or ""}')
+katie up:
+    insert('cd ..')
+    key(enter)
+
+sigterm: key(ctrl-c)
 #TODO: should this be added to linecommands?
 copy line down: user.vscode("editor.action.copyLinesDownAction")
 copy line up: user.vscode("editor.action.copyLinesUpAction")

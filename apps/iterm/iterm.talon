@@ -13,7 +13,6 @@ tag(): user.readline
 split: key(cmd-shift-d)
 split vertical: key(cmd-d)
 blow dog: key(cmd-shift-enter)
-sigterm: key(ctrl-c)
 
 tab <number_small>: key("cmd-{number_small}")
 pane <number_small>: key("ctrl-{number_small}")
