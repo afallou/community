@@ -31,5 +31,4 @@ not tag: user.deep_sleep
 
 parrot(cluck):
     user.mouse_wake()
-    user.history_enable()
     user.talon_mode()

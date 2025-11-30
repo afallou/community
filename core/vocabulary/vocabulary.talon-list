@@ -15,6 +15,7 @@ Claude
 CLI
 config
 see tea oh: CTO
+diff
 DNS
 endpoint
 enum
@@ -50,10 +51,12 @@ Quaero
 Qdrant
 ruff
 Scileads
+sequelize
 SQL
 TacArc
 tech
 tmux
+you you id: UUID
 UI
 upsert
 URI

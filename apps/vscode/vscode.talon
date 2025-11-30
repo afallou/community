@@ -19,14 +19,35 @@ bandaid: user.vscode("editor.action.quickFix")
 
 # AI Chat interactions
 chat discuss: user.vscode("aichat.newchataction")
+chat discuss new:
+    user.vscode("aichat.newchataction")
+    sleep(100ms)
+    key(cmd-n)
 agent dog: user.vscode("cursor.toggleAgentWindowIDEUnification")
 patrol dog: user.vscode("workbench.action.toggleAuxiliaryBar")
+# Brings selection into chat
+chat bring: user.vscode("aichat.newchataction")
 chat plan: user.vscode("composerMode.plan")
 chat add: user.vscode("aipopup.action.modal.generate")
 chat accept: user.vscode("editor.action.inlineDiffs.acceptAll")
 chat file hunt: user.vscode("aichat.addfilestochataction")
-chat close: user.vscode("aichat.close-sidebar")
-chat new: key(cmd-n)
+chat close: user.vscode("composer.closeComposerTab")
+chat dog: user.vscode("aichat.close-sidebar")
+chat stop: user.vscode("composer.cancelComposerStep")
+chat history: user.vscode("composer.showComposerHistory")
+chat new: user.vscode("composer.newAgentChat")
+chat focus: user.vscode("aichat.newfollowupaction")
+chat last: user.vscode("composer.selectPreviousComposer")
+chat next: user.vscode("composer.selectNextComposer")
+chat build: user.vscode("planEditor.acceptPlan")
+chat shrink:
+    user.vscode("aichat.newfollowupaction")
+    user.vscode("workbench.action.decreaseViewSize")
+chat grow:
+    user.vscode("aichat.newfollowupaction")
+    user.vscode("workbench.action.increaseViewSize")
+
+
 
 # (breakpoint | break point): insert("breakpoint()")
 
@@ -73,10 +94,22 @@ bar outline: user.vscode("outline.focus")
 bar run: user.vscode("workbench.view.debug")
 bar search: user.vscode("workbench.view.search")
 bar source: user.vscode("workbench.view.scm")
-bar test: user.vscode("workbench.view.testing.focus", something_new)
+bar debug: user.vscode("workbench.view.debug")
 bar dog: user.vscode("workbench.action.toggleSidebarVisibility")
+bar focus: user.vscode("workbench.action.focusSideBar")
+bar shrink:
+    user.vscode("workbench.action.focusSideBar")
+    user.vscode("workbench.action.decreaseViewSize")
+bar grow:
+    user.vscode("workbench.action.focusSideBar")
+    user.vscode("workbench.action.increaseViewSize")
 # Extensions
 bar sql: user.vscode("workbench.view.extension.postgres-explorer")
+
+search focus: user.vscode("search.action.focusSearchFromResults")
+search open: user.vscode("search.action.openInEditor")
+search last: user.vscode("search.action.focusPreviousSearchResult")
+search next: user.vscode("search.action.focusNextSearchResult")
 
 # Cursor AI suggestions
 prop last: user.vscode("editor.action.inlineDiffs.previousChange")
@@ -144,9 +177,11 @@ split next: user.vscode("workbench.action.moveEditorToNextGroup")
 split last: user.vscode("workbench.action.moveEditorToPreviousGroup")
 split pop: user.vscode("workbench.action.moveEditorToNewWindow")
 split merge: user.vscode("workbench.action.joinAllGroups")
+split grow: user.vscode("workbench.action.increaseViewSize")
+split shrink: user.vscode("workbench.action.decreaseViewSize")
 panel close: user.vscode("workbench.action.closePanel")
 # File Commands
-file hunt [<user.text>]:
+(file|dock|doc) hunt [<user.text>]:
     user.vscode("workbench.action.quickOpen")
     sleep(50ms)
     insert(text or "")
@@ -173,6 +208,7 @@ file create scratch:
     sleep(100ms)
     insert("scratchpad.md")
     key(enter)
+
 file rename:
     user.vscode("fileutils.renameFile")
     sleep(150ms)
@@ -315,16 +351,18 @@ test cancel: user.vscode("testing.cancelRun")
 
 # Debugging
 break point: user.vscode("editor.debug.action.toggleBreakpoint")
-step over: user.vscode("workbench.action.debug.stepOver")
+debug step: user.vscode("workbench.action.debug.stepOver")
 debug step into: user.vscode("workbench.action.debug.stepInto")
 debug step out [of]: user.vscode("workbench.action.debug.stepOut")
 debug start: user.vscode("workbench.action.debug.start")
 debug pause: user.vscode("workbench.action.debug.pause")
-debug stopper: user.vscode("workbench.action.debug.stop")
+debug cancel: user.vscode("workbench.action.debug.stop")
 debug continue: user.vscode("workbench.action.debug.continue")
 debug restart: user.vscode("workbench.action.debug.restart")
 debug console: user.vscode("workbench.debug.action.toggleRepl")
 debug clean: user.vscode("workbench.debug.panel.action.clearReplAction")
+debug variables: user.vscode("workbench.debug.action.focusVariablesView")
+debug collapse calls: user.vscode("callStack.collapse")
 
 # Terminal
 term external: user.vscode("workbench.action.terminal.openNativeConsole")
@@ -344,6 +382,12 @@ term again:
 term scroll up: user.vscode("workbench.action.terminal.scrollUp")
 term scroll down: user.vscode("workbench.action.terminal.scrollDown")
 term <number_small>: user.vscode_terminal(number_small)
+term shrink:
+    user.vscode("workbench.action.terminal.focusTabs")
+    user.vscode("workbench.action.decreaseViewSize")
+term grow:
+    user.vscode("workbench.action.terminal.focusTabs")
+    user.vscode("workbench.action.increaseViewSize")
 
 task run [<user.text>]:
     user.vscode("workbench.action.tasks.runTask")
@@ -398,7 +442,7 @@ cell create below: user.vscode("notebook.cell.insertCodeCellBelow")
 install local: user.vscode("workbench.extensions.action.installVSIX")
 preview markdown: user.vscode("markdown.showPreview")
 
-cross: user.split_next()
+cross: user.vscode("workbench.action.navigateEditorGroups")
 
 (<user.show_list> sesh | sesh <user.show_list>) [<user.text>] [halt]:
     user.vscode("workbench.action.openRecent")
@@ -415,3 +459,17 @@ cross: user.split_next()
 {user.search_engine} scout <user.cursorless_target>:
     text = user.cursorless_get_text(cursorless_target)
     user.search_with_search_engine(search_engine, text)
+
+
+# cursorless insertion
+position <user.any_alphanumeric_key> <user.cursorless_destination>:
+    user.cursorless_insert(cursorless_destination, any_alphanumeric_key)
+
+position [word] <word> <user.cursorless_destination>:
+    user.cursorless_insert(cursorless_destination, word)
+
+ref hunt <user.cursorless_target>:
+    user.cursorless_command("setSelection", cursorless_target)
+    user.vscode("references-view.find")
+ref last: user.vscode("references-view.prev")
+ref next: user.vscode("references-view.next")
