@@ -2,4 +2,5 @@ list: user.phrase_ender
 -
 
 over: ""
-(void | spacer): " "
+spacer: " "
+void: " "

@@ -1,5 +1,5 @@
 #custom vscode commands go here
-app: vscode
+app: antigravity
 -
 tag(): user.find_and_replace
 tag(): user.line_commands
@@ -47,7 +47,22 @@ chat grow:
     user.vscode("aichat.newfollowupaction")
     user.vscode("workbench.action.increaseViewSize")
 
-
+# Cursor AI suggestions
+prop last: user.vscode("inlineChat.moveToPreviousHunk")
+prop next: user.vscode("inlineChat.moveToNextHunk")
+prop yes:
+    user.vscode("inlineChat2.keep")
+    user.vscode("editor.action.inlineDiffs.nextChange")
+prop no:
+    user.vscode("inlineChat2.undo")
+    user.vscode("editor.action.inlineDiffs.nextChange")
+prop file accept: user.vscode("inlineChat.acceptChanges")
+prop continue:
+    user.vscode("inlineChat.acceptChanges")
+    user.vscode("editor.action.inlineDiffs.nextDiffFile")
+prop file reject: user.vscode("editor.action.inlineDiffs.rejectAll")
+prop file next: user.vscode("editor.action.inlineDiffs.nextDiffFile")
+prop file last: user.vscode("editor.action.inlineDiffs.previousDiffFile")
 
 # (breakpoint | break point): insert("breakpoint()")
 
@@ -111,22 +126,6 @@ search open: user.vscode("search.action.openInEditor")
 search last: user.vscode("search.action.focusPreviousSearchResult")
 search next: user.vscode("search.action.focusNextSearchResult")
 
-# Cursor AI suggestions
-prop last: user.vscode("editor.action.inlineDiffs.previousChange")
-prop next: user.vscode("editor.action.inlineDiffs.nextChange")
-prop yes:
-    user.vscode("editor.action.inlineDiffs.acceptPartialEdit")
-    user.vscode("editor.action.inlineDiffs.nextChange")
-prop no:
-    user.vscode("editor.action.inlineDiffs.rejectPartialEdit")
-    user.vscode("editor.action.inlineDiffs.nextChange")
-prop file accept: user.vscode("editor.action.inlineDiffs.acceptAll")
-prop continue:
-    user.vscode("editor.action.inlineDiffs.acceptAll")
-    user.vscode("editor.action.inlineDiffs.nextDiffFile")
-prop file reject: user.vscode("editor.action.inlineDiffs.rejectAll")
-prop file next: user.vscode("editor.action.inlineDiffs.nextDiffFile")
-prop file last: user.vscode("editor.action.inlineDiffs.previousDiffFile")
 
 # Symbol search
 symbol hunt [<user.text>]:

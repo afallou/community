@@ -82,6 +82,7 @@ class Actions:
         original_window = ui.active_window()
         editor_app = get_editor_app()
         selected_text = actions.edit.selected_text()
+        print(f"SELECTED {selected_text}")
         actions.user.switcher_focus_app(editor_app)
         # Wait additional time for talon context to update.
         actions.sleep("200ms")
